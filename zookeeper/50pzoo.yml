@@ -57,7 +57,7 @@ spec:
             cpu: 10m
             memory: 100Mi
           limits:
-            memory: 120Mi
+            memory: 256Mi
         readinessProbe:
           exec:
             command:
@@ -80,7 +80,7 @@ spec:
       name: data
     spec:
       accessModes: [ "ReadWriteOnce" ]
-      storageClassName: kafka-zookeeper
+      storageClassName: prod-ceph-rbd
       resources:
         requests:
-          storage: 1Gi
+          storage: 10Gi

@@ -58,6 +58,7 @@ spec:
           containerPort: 9092
         - name: outside
           containerPort: 9094
+          hostPort: 9094
         - name: jmx
           containerPort: 5555
         command:
@@ -70,12 +71,12 @@ spec:
         resources:
           requests:
             cpu: 100m
-            memory: 100Mi
+            memory: 256Mi
           limits:
             # This limit was intentionally set low as a reminder that
             # the entire Yolean/kubernetes-kafka is meant to be tweaked
             # before you run production workloads
-            memory: 600Mi
+            memory: 4086Mi
         readinessProbe:
           tcpSocket:
             port: 9092
@@ -100,7 +101,7 @@ spec:
       name: data
     spec:
       accessModes: [ "ReadWriteOnce" ]
-      storageClassName: kafka-broker
+      storageClassName: prod-ceph-rbd
       resources:
         requests:
-          storage: 10Gi
+          storage: 512Gi
