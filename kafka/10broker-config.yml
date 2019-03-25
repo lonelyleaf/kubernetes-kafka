@@ -25,7 +25,7 @@ data:
         SEDS+=("s/#init#broker.rack=#init#/broker.rack=$ZONE/")
         LABELS="$LABELS kafka-broker-rack=$ZONE"
       fi
-      OUTSIDE_HOST=$(kubectl get node "$NODE_NAME" -o jsonpath='{.metadata.annotations['rke\.cattle\.io/external-ip']}')
+      OUTSIDE_HOST=$(kubectl get node "$NODE_NAME" -o jsonpath=$'{.metadata.annotations[\'rke\.cattle\.io/external-ip\']}')
       echo "OUTSIDE_HOST!! $OUTSIDE_HOST"
       OUTSIDE_PORT=9094
       SEDS+=("s|#init#advertised.listeners=OUTSIDE://#init#|advertised.listeners=OUTSIDE://${OUTSIDE_HOST}:${OUTSIDE_PORT}|")
