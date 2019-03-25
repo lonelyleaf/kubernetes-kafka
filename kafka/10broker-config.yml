@@ -26,7 +26,6 @@ data:
         LABELS="$LABELS kafka-broker-rack=$ZONE"
       fi
       OUTSIDE_HOST=$(kubectl get node "$NODE_NAME" -o jsonpath=$'{.metadata.annotations[\'rke\.cattle\.io/external-ip\']}')
-      echo "OUTSIDE_HOST!! $OUTSIDE_HOST"
       OUTSIDE_PORT=9094
       SEDS+=("s|#init#advertised.listeners=OUTSIDE://#init#|advertised.listeners=OUTSIDE://${OUTSIDE_HOST}:${OUTSIDE_PORT}|")
       ANNOTATIONS="$ANNOTATIONS kafka-listener-outside-host=$OUTSIDE_HOST kafka-listener-outside-port=$OUTSIDE_PORT"
@@ -85,7 +84,7 @@ data:
     # it uses the value for "listeners" if configured.  Otherwise, it will use the value
     # returned from java.net.InetAddress.getCanonicalHostName().
     #advertised.listeners=PLAINTEXT://your.host.name:9092
-    init#advertised.listeners=OUTSIDE://#init#,PLAINTEXT://:9092
+    #init#advertised.listeners=OUTSIDE://#init#,PLAINTEXT://:9092
 
     # Maps listener names to security protocols, the default is for them to be the same. See the config documentation for more details
     #listener.security.protocol.map=PLAINTEXT:PLAINTEXT,SSL:SSL,SASL_PLAINTEXT:SASL_PLAINTEXT,SASL_SSL:SASL_SSL
